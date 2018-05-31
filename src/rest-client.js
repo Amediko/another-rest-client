@@ -185,7 +185,10 @@ function resource(client, parent, name, id, ctx) {
     };
 
     self.delete = (data, contentType = client._opts.contentType) => {
-        return client._request('DELETE', self.url(), data, contentType);
+        let url = self.url();
+        if (data)
+            url += '?' + encodeUrl(data);
+        return client._request('DELETE', url);
     };
     return self;
 }
