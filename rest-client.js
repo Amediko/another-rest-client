@@ -263,7 +263,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    self.delete = function (data) {
 	        var contentType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : client._opts.contentType;
 	
-	        return client._request('DELETE', self.url(), data, contentType);
+	        var url = self.url();
+	        if (data) url += '?' + encodeUrl(data);
+	        return client._request('DELETE', url);
 	    };
 	    return self;
 	}
